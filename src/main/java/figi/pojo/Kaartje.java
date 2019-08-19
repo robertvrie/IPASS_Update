@@ -1,6 +1,5 @@
 package figi.pojo;
 
-import jdk.internal.jline.internal.Nullable;
 import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
