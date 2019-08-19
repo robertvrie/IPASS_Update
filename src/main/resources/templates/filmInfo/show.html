@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+    <title>Log in</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Info over films</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Film Id:</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static" th:text="${filmInfo.id}">Film Id</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Naam:</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static" th:text="${filmInfo.naam}">Naam</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Beschrijving:</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static" th:text="${filmInfo.beschrijving}">Beschrijving</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">Lengte:</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static" th:text="${filmInfo.lengte}">Lengte</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

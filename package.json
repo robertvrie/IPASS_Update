@@ -1,0 +1,23 @@
+{
+  "name": "java-getting-started",
+  "version": "1.0.0",
+  "description": "A barebones Java app, which can easily be deployed to Heroku.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "java -jar target/java-getting-started-1.0.jar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heroku/java-getting-started.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heroku/java-getting-started/issues"
+  },
+  "homepage": "https://github.com/heroku/java-getting-started#readme"
+}

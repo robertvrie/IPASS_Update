@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+    <title>Log in</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(zalen)}">
+        <h2>Lijst van zalen in bioscoop Figi</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Zaalnummer</th>
+                <th>Aantal rijen</th>
+                <th>Aantal stoelen per rij</th>
+                <th>Zaal verwijderen</th>
+            </tr>
+            <tr th:each="zaal : ${zalen}">
+                <td th:text="${zaal.id}"></td>
+                <td th:text="${zaal.aantalRijen}"></td>
+                <td th:text="${zaal.aantalStoelenPerRij}"></td>
+                <td sec:authorize="hasRole('ROLE_MANAGEMENT')"><a th:href="${'/zaal/verwijder/' + zaal.id}">Verwijder</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/zaal/toevoegen">Nieuwe zaal toevoegen</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

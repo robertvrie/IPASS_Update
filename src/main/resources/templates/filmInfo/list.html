@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+    <title>Log in</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(filmInfos)}">
+        <h2>Lijst van films</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Naam</th>
+                <th>Beschrijving</th>
+                <th>Lengte</th>
+                <th></th>
+                <th sec:authorize="hasRole('ROLE_MANAGEMENT')">Wijzig</th>
+                <th sec:authorize="hasRole('ROLE_MANAGEMENT')">Verwijder</th>
+            </tr>
+            <tr th:each="filmInfo : ${filmInfos}">
+                <td th:text="${filmInfo.id}"></td>
+                <td th:text="${filmInfo.naam}"></td>
+                <td th:text="${filmInfo.beschrijving}"></td>
+                <td th:text="${filmInfo.lengte}"></td>
+                <td><a th:href="${'/films/' + filmInfo.id}">Bekijk alle screenings</a> </td>
+                <td sec:authorize="hasRole('ROLE_MANAGEMENT')"><a th:href="${'/filmInfo/edit/' + filmInfo.id}">Wijzig</a> </td>
+                <td sec:authorize="hasRole('ROLE_MANAGEMENT')"><a th:href="${'/filmInfo/delete/' + filmInfo.id}">Verwijder</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/filmInfo/new">Film toevoegen</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

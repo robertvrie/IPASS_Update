@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+    <title>Log in</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+
+    <h2>Nieuwe zaal toevoegen</h2>
+    <div>
+        <form class="form-horizontal" method="post" th:object="${zaal}" th:action="@{/zaal/toevoegen/opslaan}" >
+
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <p th:text="#{form.hasErrors}">Error Message</p>
+            </div>
+
+            <div class="form-group" th:class="${#fields.hasErrors('id')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Zaalnummer:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{id}" th:errorclass="has-error"/>
+
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('id')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" th:class="${#fields.hasErrors('aantalRijen')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Aantal Rijen:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{aantalRijen}" th:errorclass="has-error"/>
+
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('aantalRijen')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" th:class="${#fields.hasErrors('aantalStoelenPerRij')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Aantal stoelen per rij:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{aantalStoelenPerRij}" th:errorclass="has-error"/>
+
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('aantalStoelenPerRij')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <button type="submit" class="btn btn-default">Verstuur</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

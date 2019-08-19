@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+    <title>Log in</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+
+    <h2>Nieuwe screening voor film toevoegen</h2>
+    <div>
+        <form class="form-horizontal" method="post" th:action="@{/films}" th:object="${film}">
+
+            <div class="form-group" th:class="${#fields.hasErrors('datum')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Datum:</label>
+                <div class="col-sm-10">
+                    <input type="datetime-local" th:field="*{datum}" class="form-control"  th:errorclass="has-error"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Zaal:</label>
+                <div class="col-sm-10">
+                    <select th:field="*{zaal}">
+                        <option th:each="zaal : ${zalen}" th:value="${zaal.id}" th:text="${zaal.id}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Film:</label>
+                <div class="col-sm-10">
+                    <select th:field="*{filmInfo}">
+                        <option th:each="filmInfo : ${filmInfos}" th:value="${filmInfo.id}" th:text="${filmInfo.naam}"></option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <button type="submit" class="btn btn-default">Verstuur</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
