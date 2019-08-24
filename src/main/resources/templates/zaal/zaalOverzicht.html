@@ -23,7 +23,7 @@
         </table>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div sec:authorize="hasRole('ROLE_MANAGEMENT')" class="col-sm-3">
             <a href="/zaal/toevoegen">Nieuwe zaal toevoegen</a>
         </div>
     </div>

@@ -29,7 +29,7 @@
         </table>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3" sec:authorize="hasRole('ROLE_MANAGEMENT')">
             <a href="/filmInfo/new">Film toevoegen</a>
         </div>
     </div>

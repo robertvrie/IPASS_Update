@@ -16,7 +16,7 @@ public class KaartjeServiceImpl implements KaartjeService {
 
     @Override
     public ArrayList<Kaartje> kaartjeVoorGebruiker() {
-        return null;
+        return kaartjeRepository.findByGebruiker(gebruikerService.ingelogdeGebruiker().getId());
     }
 
     @Override

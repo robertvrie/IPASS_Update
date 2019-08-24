@@ -22,7 +22,7 @@ public class FilmInfoController {
         this.filmInfoService = filmInfoService;
     }
     
-    @RequestMapping({"/filmInfo/list", "/filmInfo"})
+    @RequestMapping({"/filmInfo", "/home", "/"})
     public String listFilmInfo(Model model){
         model.addAttribute("filmInfos", filmInfoService.vindAlle());
         return "filmInfo/list";
