@@ -29,6 +29,12 @@ public class FilmController {
         return "film/lijst";
     }
 
+    @RequestMapping("/film/kaartjes/{id}")
+    public String lijstKaartjesVanFilm(Model model, @PathVariable Long id){
+        model.addAttribute("kaartjes", kaartjeService.kaartjesVoorFilm(id));
+        return "kaartje/lijst";
+    }
+
     @RequestMapping("/film/nieuw")
     public String nieuweFilm(Model model){
         model.addAttribute("film", new Film());

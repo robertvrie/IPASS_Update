@@ -1,5 +1,6 @@
 package figi.services;
 
+import figi.pojo.Film;
 import figi.pojo.FilmInfo;
 import figi.repositories.FilmInfoRepository;
 
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class FilmInfoServiceImpl implements FilmInfoService{
 	@Autowired
 	private FilmInfoRepository filmInfoRepository;
+	@Autowired
+	private FilmService filmService;
 	
 	@Override
 	public List<FilmInfo> vindAlle(){
@@ -33,7 +36,11 @@ public class FilmInfoServiceImpl implements FilmInfoService{
 	
 	@Override
 	public void verwijder(Long id) {
+		for(Film film : filmService.alleFilms()){
+			if(film.getFilmInfo() == id){
+				filmService.verwijder(film.getId());
+			}
+		}
 		filmInfoRepository.deleteById(id);
 	}
-
 }

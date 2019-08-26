@@ -51,8 +51,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void verwijder(Long id){
-        ArrayList<Kaartje> kaartjes = kaartjeService.kaartjesVoorFilm(id);
-        for(Kaartje kaartje: kaartjes){
+        for(Kaartje kaartje: kaartjeService.kaartjesVoorFilm(id)){
             kaartjeService.verwijder(kaartje);
         }
         filmRepository.deleteById(id);

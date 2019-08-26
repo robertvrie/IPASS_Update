@@ -25,58 +25,47 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
-    private GebruikerDetailsService gebruikerDetailsService;
+public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+	private GebruikerDetailsService gebruikerDetailsService;
 
-    public AppSecurityConfig(GebruikerDetailsService gebruikerDetailsService){
-        this.gebruikerDetailsService = gebruikerDetailsService;
-    }
-	
+	public AppSecurityConfig(GebruikerDetailsService gebruikerDetailsService) {
+		this.gebruikerDetailsService = gebruikerDetailsService;
+	}
+
 	@Override
-    protected void configure(AuthenticationManagerBuilder auth) {
-	    auth.authenticationProvider(authenticationProvider());
-    }
-	
+	protected void configure(AuthenticationManagerBuilder auth) {
+		auth.authenticationProvider(authenticationProvider());
+	}
+
 	@Override
-	protected void configure(HttpSecurity http) throws Exception{ 
+	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
 				.antMatchers("/home").permitAll()
-				.antMatchers("/zaal","/zaal/","/zaal/**").hasRole("MANAGEMENT")
-				.antMatchers("/filmInfo","/filmInfo/","/filmInfo/**").hasRole("MANAGEMENT")
-				.antMatchers("/film","/film/","/film/**").hasRole("MANAGEMENT")
-				.antMatchers("/profiel/verwijderen","/profiel/verwijderen/").hasAnyRole("GEBRUIKER","MANAGEMENT")
-				.antMatchers("/films/reserveren","/films/reserveren/","films/reserveren/**").hasRole("GEBRUIKER")
-				.antMatchers("/profiel","/profiel/", "/profiel/**").authenticated()
-				.antMatchers("/registreren","/registreren/","/registreren/**").anonymous()
+				.antMatchers("/zaal", "/zaal/", "/zaal/**").hasRole("MANAGEMENT")
+				.antMatchers("/filmInfo", "/filmInfo/", "/filmInfo/**").hasRole("MANAGEMENT")
+				.antMatchers("/film", "/film/", "/film/**").hasAnyRole("MANAGEMENT", "MEDEWERKER")
+				.antMatchers("/profiel/verwijderen", "/profiel/verwijderen/").hasAnyRole("GEBRUIKER", "MANAGEMENT")
+				.antMatchers("/films/reserveren", "/films/reserveren/", "films/reserveren/**").hasRole("GEBRUIKER")
+				.antMatchers("/profiel", "/profiel/", "/profiel/**").authenticated()
+				.antMatchers("/registreren", "/registreren/", "/registreren/**").anonymous()
 				.and()
-		        .formLogin()
-                .loginPage("/login").permitAll()
-                .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/loguit")).logoutSuccessUrl("/home");
+				.formLogin()
+				.loginPage("/login").permitAll()
+				.and()
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/loguit")).logoutSuccessUrl("/home");
 	}
 
-	DaoAuthenticationProvider authenticationProvider(){
-	    DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-	    daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-	    daoAuthenticationProvider.setUserDetailsService(this.gebruikerDetailsService);
+	DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+		daoAuthenticationProvider.setUserDetailsService(this.gebruikerDetailsService);
 
-	    return daoAuthenticationProvider;
-    }
-	
+		return daoAuthenticationProvider;
+	}
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-//	@Bean
-//	@Override
-//	protected UserDetailsService userDetailsService() {
-//		
-//		List<UserDetails> users = new ArrayList<>();
-//		users.add(User.withDefaultPasswordEncoder().username("twink").password("420").roles("USER").build());
-//		
-//		return new InMemoryUserDetailsManager(users);
-//	}
-	
 }

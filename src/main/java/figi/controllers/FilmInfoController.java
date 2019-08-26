@@ -62,6 +62,6 @@ public class FilmInfoController {
     @RequestMapping("/filmInfo/delete/{id}")
     public String delete(@PathVariable String id){
         filmInfoService.verwijder(Long.valueOf(id));
-        return "redirect:/filmInfo/list";
+        return "redirect:/filmInfo";
     }
 }

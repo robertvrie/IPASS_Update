@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+    <title>Log in</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(kaartjes)}">
+        <table class="table table-striped">
+            <tr>
+                <th>Datum screening</th>
+                <th>Zaal</th>
+                <th>Reserveren</th>
+            </tr>
+            <tr th:each="kaartje : ${kaartjes}">
+                <td th:text="${kaartje.rij}"></td>
+                <td th:text="${kaartje.stoel}"></td>
+                <td th:text="${kaartje.gebruiker}">Reserveer kaartje</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

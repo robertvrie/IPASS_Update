@@ -12,19 +12,21 @@
             <tr>
                 <th>Datum screening</th>
                 <th>Zaal</th>
-                <th></th>
-                <th sec:authorize="hasRole('ROLE_MANAGEMENT')"></th>
+                <th sec:authorize="hasAnyRole('ROLE_MEDEWERKER','ROLE_GEBRUIKER')">Reserveren</th>
+                <th sec:authorize="hasAnyRole('ROLE_MEDEWERKER','ROLE_GEBRUIKER')">Kaartjes</th>
+                <th sec:authorize="hasRole('ROLE_MANAGEMENT')">Verwijder</th>
             </tr>
             <tr th:each="film : ${films}">
                 <td th:text="${film.datum}"></td>
                 <td th:text="${film.zaal}"></td>
-                <td><a th:href="${'/film/reserveren/' + film.id}"></a></td>
+                <td sec:authorize="hasAnyRole('ROLE_MEDEWERKER','ROLE_GEBRUIKER')"><a th:href="${'/films/reserveren/' + film.id}">Reserveer kaartje</a></td>
+                <td sec:authorize="hasAnyRole('ROLE_MANAGEMENT','ROLE_MEDEWERKER')"><a th:href="${'/film/kaartjes/' + film.id}">Bekijk kaartjes</a> </td>
                 <td sec:authorize="hasRole('ROLE_MANAGEMENT')"><a th:href="${'/film/verwijder/' + film.id}">Verwijder</a> </td>
             </tr>
         </table>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3" sec:authorize="hasRole('ROLE_MANAGEMENT')">
             <a href="/film/nieuw">Nieuwe screening toevoegen</a>
         </div>
     </div>
